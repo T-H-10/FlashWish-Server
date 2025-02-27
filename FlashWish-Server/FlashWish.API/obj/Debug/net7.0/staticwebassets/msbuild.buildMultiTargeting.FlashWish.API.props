@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\FlashWish.API.props" />
+</Project>

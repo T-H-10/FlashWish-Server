@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "8xnM9YaENEjVLlOtoMTydygBJyWg7hpJjj7XTaOUA5s=",
+  "Source": "FlashWish.API",
+  "BasePath": "_content/FlashWish.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
