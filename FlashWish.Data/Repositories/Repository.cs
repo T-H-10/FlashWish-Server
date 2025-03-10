@@ -16,7 +16,7 @@ namespace FlashWish.Data.Repositories
         public Repository(DataContext context)
         {
             _context = context;
-            _dbSet =context.Set<T>();
+            _dbSet = context.Set<T>();
         }
         public T Add(T entity)
         {
@@ -30,16 +30,41 @@ namespace FlashWish.Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
-
-        public T? GetById(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public T Update(T entity)
+        public T Update(int id, T entity)
         {
-            _dbSet.Update(entity);
-            _context.SaveChanges();
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity), "The entity cannot be null.");
+            }
+            var existingEntity = _dbSet.Find(id);
+            if (existingEntity == null)
+            {
+                throw new InvalidOperationException("Entity not found.");
+            }
+            var properties = typeof(T).GetProperties();
+            var keyProperties = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties;
+            foreach (var property in properties)
+            {
+                // בדוק אם המאפיין הוא ID
+                if (!keyProperties.Any(k => k.Name == property.Name) && property.CanWrite)
+                {
+                    var newValue = property.GetValue(entity);
+                    property.SetValue(existingEntity, newValue);
+                }
+            }
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception("An error occurred while updating the entity.", ex);
+            }
             return entity;
         }
         public void Delete(T entity)

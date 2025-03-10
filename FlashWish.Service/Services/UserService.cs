@@ -34,7 +34,7 @@ namespace FlashWish.Service.Services
 
         public bool DeleteUser(int id)
         {
-            var userDTO = _repositoryManager.Users.GetById(id);
+            var userDTO = _repositoryManager.Users.GetByIdAsync(id);
             var userToDelete= _mapper.Map<User>(userDTO);
             if(userToDelete == null) { return false; }
             _repositoryManager.Users.Delete(userToDelete);
@@ -50,18 +50,15 @@ namespace FlashWish.Service.Services
 
         public UserDTO? GetUserById(int id)
         {
-            var user= _repositoryManager.Users.GetById(id);
+            var user= _repositoryManager.Users.GetByIdAsync(id);
             return _mapper.Map<UserDTO>(user);
         }
 
         public UserDTO? UpdateUser(int id, UserDTO user)
         {
+            if (user == null) return null;
             var userToUpdate= _mapper.Map<User>(user);
-            if (userToUpdate == null)
-            {
-                return null;
-            }
-            _repositoryManager.Users.Update(userToUpdate);
+            _repositoryManager.Users.Update(id,userToUpdate);
             _repositoryManager.Save();
             return _mapper.Map<UserDTO?>(userToUpdate);
         }

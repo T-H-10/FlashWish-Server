@@ -18,7 +18,8 @@ namespace FlashWish.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);//----
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FlashWish1_db;TrustServerCertificate=True;Trusted_Connection=True;");
+            //base.OnConfiguring(optionsBuilder);//----
         }
     }
 }

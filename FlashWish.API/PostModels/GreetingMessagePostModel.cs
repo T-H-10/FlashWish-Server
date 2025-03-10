@@ -8,7 +8,6 @@ namespace FlashWish.API.PostModels
 {
     public class GreetingMessagePostModel
     {
-        public int TextID { get; set; }
         public int CategoryID { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

@@ -10,9 +10,9 @@ namespace FlashWish.API
         {
             CreateMap<UserPostModel, UserDTO>();
             CreateMap<TemplatePostModel, TemplateDTO>();
-            CreateMap<GreetingCardPostModel, GreetingCardDTOs>();
-            CreateMap<GreetingMessagePostModel, GreetingMessageDTOs>();
-            CreateMap<CategoryPostModel, CategoryDTOs>();
+            CreateMap<GreetingCardPostModel, GreetingCardDTO>();
+            CreateMap<GreetingMessagePostModel, GreetingMessageDTO>();
+            CreateMap<CategoryPostModel, CategoryDTO>();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace FlashWish.API.Controllers
         public ActionResult<UserDTO> Get(int id)
         {
             var user = _userService.GetUserById(id);
-            if(user==null) return NotFound();
+            if(user==null) return NotFound(id);
             return user;
         }
 
